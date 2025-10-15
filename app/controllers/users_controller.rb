@@ -8,11 +8,12 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(uid: params[:user][:uid], pass: params[:user][:pass], age: params[:user][:age])
+    encrypted_pass = BCrypt::Password.create(params[:user][:pass])
+    @user = User.new(uid: params[:user][:uid], pass: encrypted_pass, age: params[:user][:age])
     if @user.save
       redirect_to users_path, notice: "登録完了"
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 

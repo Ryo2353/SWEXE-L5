@@ -1,0 +1,7 @@
+<h1>メッセージ新規登録</h1>
+
+<%= form_with model: @tweet do |f| %>
+  <%= f.label :message, 'メッセージ' %>
+  <%= f.text_field :message %>
+  <%= f.submit 'ツイート' %>
+<% end %>
