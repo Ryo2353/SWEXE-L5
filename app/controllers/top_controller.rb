@@ -1,10 +1,6 @@
 class TopController < ApplicationController
     def main
-        if session[:login_uid] != nil
-            render "main"
-        else
-            render "login_form"
-        end
+        render "login_form"
     end
     
     def login
@@ -19,8 +15,7 @@ class TopController < ApplicationController
     
     def logout
         session.delete(:login_uid)
-        redirect_to top_main_path
+        redirect_to tweets_path
     end
-    
     
 end
