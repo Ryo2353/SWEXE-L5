@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     p = Profile.new(message: nil)
     @user.profile = p
     if @user.save
-      redirect_to tweets_path, notice: "登録完了"
+      redirect_to tweets_path
     else
       render :new, status: :unprocessable_entity
     end
@@ -22,6 +22,6 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.destroy
-    redirect_to users_path, notice: "削除しました"
+    redirect_to users_path
   end
 end

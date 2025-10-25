@@ -8,10 +8,10 @@ class TweetsController < ApplicationController
   end
 
   def create
-    u = User.find_by(uid: session[:login_uid])
-    @tweet = u.tweets.new(message: params[:tweet][:message])
-    if @tweet.save
-      redirect_to tweets_path, notice: "登録完了"
+    t = Tweet.new(message: params[:tweet][:message])
+    t.user = User.find_by(uid: session[:login_uid])
+    if t.save
+      redirect_to tweets_path
     else
       render :new
     end
@@ -20,6 +20,6 @@ class TweetsController < ApplicationController
   def destroy
     @tweet = Tweet.find(params[:id])
     @tweet.destroy
-    redirect_to tweets_path, notice: "削除しました"
+    redirect_to tweets_path
   end
 end

@@ -19,9 +19,7 @@
 <% if session[:login_uid] %>
   <%= link_to "ツイート追加", new_tweet_path %><br>
   <%= link_to "ログアウト", top_logout_path %><br>
-  <% if current_user%>
-      <%= link_to "プロフィール", profile_path(Profile.find_by(user_id: current_user)) %><br>
-  <% end %>
+  <%= link_to "プロフィール", profile_path(Profile.find_by(user_id: current_user.id)) %><br>
   ログイン中UID：<%= session[:login_uid] %><br>
 <% else %>
     <%= link_to "ログイン", top_main_path %><br>
