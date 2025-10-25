@@ -4,7 +4,7 @@
 <ul>
   <% @users.each do |user| %>
     <li>
-      <%= user.uid %>（<%= user.age %>歳）
+      <%= user.uid %>
       <%= link_to "削除", user_path(user), data: { turbo_method: :delete} %>
     </li>
   <% end %>
