@@ -13,7 +13,6 @@ class UsersController < ApplicationController
     p = Profile.new(message: nil)
     @user.profile = p
     if @user.save
-      session[:login_uid] = @user.uid
       redirect_to tweets_path, notice: "登録完了"
     else
       render :new, status: :unprocessable_entity
