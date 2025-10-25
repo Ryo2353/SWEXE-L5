@@ -1,0 +1,9 @@
+<h1>メッセージ編集</h1>
+
+<%= form_with model: @profile do |f| %>
+  <p><%= f.label :message, 'メッセージ' %></p>
+  <p><%= f.text_area :message %></p>
+  <p><%= f.submit '更新' %></p>
+<% end %>
+
+<%= link_to "戻る", profile_path(@profile.id) %>

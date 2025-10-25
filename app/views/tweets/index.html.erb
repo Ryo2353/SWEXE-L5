@@ -1,11 +1,11 @@
 <h1>ツイート一覧</h1>
+<% current_user = User.find_by(uid: session[:login_uid]) %>
 
 <% @tweets.each do |e| %>
     <%= e.message %>
     <%= e.like_users.count %>
    
     <% if session[:login_uid] %>
-        <% current_user = User.find_by(uid: session[:login_uid]) %>
         <% if current_user && current_user.id == e.user_id %>
             <%= link_to '削除', tweet_path(e), data: {turbo_method: :delete} %>
         <% end %>
@@ -20,6 +20,9 @@
 <% if session[:login_uid] %>
   <%= link_to "ツイート追加", new_tweet_path %><br>
   <%= link_to "ログアウト", top_logout_path %><br>
+  <% if current_user%>
+      <%= link_to "プロフィール", profile_path(Profile.find_by(user_id: current_user.id)) %><br>
+  <% end %>
   ログイン中UID：<%= session[:login_uid] %><br>
 <% else %>
     <%= link_to "ログイン", top_main_path %><br>
@@ -28,6 +31,5 @@
 <br>
 
 <%= link_to "ユーザー新規追加", new_user_path %><br>
-
 
 

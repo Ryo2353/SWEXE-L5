@@ -1,0 +1,6 @@
+<p>ユーザー名：<%= User.find_by(id: @profile.user_id).uid %></p>
+<p>自己紹介：<%= @profile.message %></p>
+
+<%= link_to "編集", edit_profile_path(@profile.id) %><br>
+
+<%= link_to "戻る", tweets_path %>

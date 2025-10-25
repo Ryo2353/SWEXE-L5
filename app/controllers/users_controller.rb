@@ -10,6 +10,8 @@ class UsersController < ApplicationController
   def create
     encrypted_pass = BCrypt::Password.create(params[:user][:pass])
     @user = User.new(uid: params[:user][:uid], pass: encrypted_pass)
+    p = Profile.new(message: nil)
+    @user.profile = p
     if @user.save
       session[:login_uid] = @user.uid
       redirect_to tweets_path, notice: "登録完了"
