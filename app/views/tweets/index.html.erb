@@ -3,9 +3,12 @@
 <% @tweets.each do |e| %>
     <%= e.message %>
     <%= e.like_users.count %>
-    <%= link_to '削除', tweet_path(e), data: {turbo_method: :delete} %>
    
     <% if session[:login_uid] %>
+        <% current_user = User.find_by(uid: session[:login_uid]) %>
+        <% if current_user && current_user.id == e.user_id %>
+            <%= link_to '削除', tweet_path(e), data: {turbo_method: :delete} %>
+        <% end %>
         <%= link_to 'いいね', likes_path(tweet_id: e.id), data: { turbo_method: :post } %>
         <%= link_to 'いいね削除', like_path(e), data: { turbo_method: :delete } %>
     <% end %>
@@ -16,12 +19,15 @@
 
 <% if session[:login_uid] %>
   <%= link_to "ツイート追加", new_tweet_path %><br>
+  <%= link_to "ログアウト", top_logout_path %><br>
+  ログイン中UID：<%= session[:login_uid] %><br>
+<% else %>
+    <%= link_to "ログイン", top_main_path %><br>
 <% end %>
 
 <br>
 
 <%= link_to "ユーザー新規追加", new_user_path %><br>
-<%= link_to "ログイン", top_main_path %><br>
-<%= link_to "ログアウト", top_logout_path %><br>
-ログイン中UID：<%= session[:login_uid] %>
+
+
 
